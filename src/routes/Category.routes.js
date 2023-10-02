@@ -6,4 +6,6 @@ const validateJWT = require('../auth/validateJWT');
 
 route.post('/', validateJWT, veriryPostNewCategory, CategoryController.createNewCategory);
 
+route.get('/', validateJWT, CategoryController.getAllCategories);
+
 module.exports = route;
