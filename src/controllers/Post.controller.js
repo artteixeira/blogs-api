@@ -66,9 +66,28 @@ const update = async (req, res) => {
   return res.status(200).json(updatedPost);
 };
 
+const exclude = async (req, res) => {
+  const { id } = req.params;
+
+  const post = await PostService.getById(id);
+
+  if (!post) {
+    return res.status(404).json({ message: 'Post does not exist' });
+  }
+
+  if (post.userId !== req.user.id) {
+    return res.status(401).json({ message: 'Unauthorized user' });
+  }
+
+  await PostService.exclude(id);
+
+  return res.status(204).end();
+};
+
 module.exports = {
   createNewPost,
   getAll,
   getById,
   update,
+  exclude,
 };
