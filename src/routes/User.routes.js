@@ -10,4 +10,5 @@ route.get('/', validateJWT, UserController.getAllUsers);
 
 route.get('/:id', validateJWT, UserController.getById);
 
+route.delete('/me', validateJWT, UserController.exclude);
 module.exports = route;

@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User, BlogPost } = require('../models');
 
 const getByEmail = async (email) => {
   const user = await User.findOne({
@@ -31,9 +31,15 @@ const getAll = async () => {
   return users;
 };
 
+const exclude = async (id) => {
+  await BlogPost.destroy({ where: { userId: id } });
+  await User.destroy({ where: { id } });
+};
+
 module.exports = {
   getByEmail,
   createNewUser,
   getByUserId,
   getAll,
+  exclude,
 };

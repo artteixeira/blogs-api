@@ -18,6 +18,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER, 
       foreignKey: true,
       allowNull: false,
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE',
     },
     published: {
       type: DataTypes.DATE,
