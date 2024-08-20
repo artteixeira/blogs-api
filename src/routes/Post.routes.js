@@ -6,6 +6,7 @@ const verifyPostBlogPosts = require('../middlewares/verifyPostBlogPosts');
 const verifyPutBlogPosts = require('../middlewares/verifyPutBlogPosts');
 
 route.post('/', validateJWT, verifyPostBlogPosts, PostController.createNewPost);
+route.get('/search', validateJWT, PostController.search);
 route.get('/', validateJWT, PostController.getAll);
 route.get('/:id', validateJWT, PostController.getById);
 route.put('/:id', validateJWT, verifyPutBlogPosts, PostController.update);

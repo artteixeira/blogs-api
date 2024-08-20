@@ -66,10 +66,26 @@ const exclude = async (id) => {
   return post;
 };
 
+const search = async (query) => {
+  const posts = await BlogPost.findAll({
+    where: { [Sequelize.Op.or]: [
+      { title: { [Sequelize.Op.like]: `%${query}%` } },
+      { content: { [Sequelize.Op.like]: `%${query}%` } },
+    ] },
+    include: [
+      { model: User, as: 'user', attributes: { exclude: 'password' } },
+      { model: Category, as: 'categories' },
+    ],
+  });
+
+  return posts;
+};
+
 module.exports = {
   createNewPost,
   getAll,
   getById,
   update,
   exclude,
+  search,
 };
